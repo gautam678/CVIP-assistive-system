@@ -8,6 +8,8 @@ cap = cv2.VideoCapture(0)
 '''
 Trainer File
 '''
+#initialize an empty image to check for all contour position throughout
+last=np.zeros((480,640,1),np.uint8)
 #Open file for moments
 fmina = open("minm.txt","r")
 fmaxa = open("maxm.txt","r")
@@ -111,20 +113,24 @@ while True:
  #   print sum1
  #   print sum2
     if sum1>0 and sum2>0:
-        count+=1
-        finaltl.append(top_left)
-        finalbr.append(bottom_right)
-        if count==100:
-            (xt,yt)=(np.argmax(np.bincount([i[0] for i in finaltl])),np.argmax(np.bincount([i[1] for i in finaltl])))
-            (xb,yb)=(np.argmax(np.bincount([i[0] for i in finalbr])),np.argmax(np.bincount([i[1] for i in finalbr])))
-            break
+        #print top_left,bottom_right
+        x=(bottom_right[0]+top_left[0])/2
+        y=(bottom_right[1]+top_left[1])/2
+        if(y>250 and y <350 ):
+            print " Correct "
+        elif(y<250):
+            print " Go left "
+        elif(y>350):
+            print "Go right "
         sum1=0
         sum2=0
         cv2.rectangle(img,top_left,bottom_right,(127,127,127))
         cv2.rectangle(im,top_left,bottom_right,(127,127,127))
+        cv2.rectangle(last,top_left,bottom_right,(127,127,127))
         cv2.imshow("PICK",mat)
     cv2.imshow("BIN",img1)
     cv2.imshow("EXE",im)
+    cv2.imshow("asdas",last)
 
 ##        if cv2.waitKey(10) == 120:
 ##            continue
@@ -135,8 +141,6 @@ while True:
         cv2.destroyAllWindows()
         
         break
-print xt,yt
-print xb,yb
 
 print finaltl,"top left"
 print finalbr,"bottom right"
