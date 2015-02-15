@@ -1,5 +1,4 @@
 #import libraries
-# I am also joining
 import cv2
 import cPickle
 import numpy as np
