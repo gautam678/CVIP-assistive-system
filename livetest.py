@@ -24,7 +24,11 @@ fmaxa = open("maxh.txt","r")
 minh = fmina.read().split(" ")
 maxh = fmaxa.read().split(" ")
 #Find the largest contour
+count=0
+finaltl=[]
+finalbr=[]
 while True:
+    
     top_left = (0,0)
     bottom_right = (0,0)
     ret,im = cap.read()
@@ -107,11 +111,17 @@ while True:
  #   print sum1
  #   print sum2
     if sum1>0 and sum2>0:
-        print "A"
+        count+=1
+        finaltl.append(top_left)
+        finalbr.append(bottom_right)
+        if count==100:
+            (xt,yt)=(np.argmax(np.bincount([i[0] for i in finaltl])),np.argmax(np.bincount([i[1] for i in finaltl])))
+            (xb,yb)=(np.argmax(np.bincount([i[0] for i in finalbr])),np.argmax(np.bincount([i[1] for i in finalbr])))
+            break
         sum1=0
+        sum2=0
         cv2.rectangle(img,top_left,bottom_right,(127,127,127))
         cv2.rectangle(im,top_left,bottom_right,(127,127,127))
-
         cv2.imshow("PICK",mat)
     cv2.imshow("BIN",img1)
     cv2.imshow("EXE",im)
@@ -123,5 +133,10 @@ while True:
 ####    continue
     if cv2.waitKey(10)==27:
         cv2.destroyAllWindows()
+        
         break
-    
+print xt,yt
+print xb,yb
+
+print finaltl,"top left"
+print finalbr,"bottom right"
