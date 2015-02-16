@@ -1,4 +1,4 @@
-#CVIP assistive system - Object recognition to identify a coffeemaker/Appliance
+#CVIP assistive system - Object recognition to identify a Coffee Maker (or any appliance)
 ## Introduction
 In this project we are trying to identify an applicance in a static background. The assumption made here is that the object is located in an ideal environment. We have used python **(version : 2.7)**  with OpenCv **(version : 2.4.3 )** to code this project. 
 
