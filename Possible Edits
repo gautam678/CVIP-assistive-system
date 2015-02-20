@@ -1,0 +1,4 @@
+As per the discussion, shall we re-code to scan all the contours for the features, and decide which of them match up with the trained set,
+or shall we stock to what we have now, that is, scan the largest contour and check for its features.
+
+Please leave a comment here, so the work can progress ASAP.
